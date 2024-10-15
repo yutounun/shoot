@@ -1,9 +1,12 @@
-import { Text, View } from "react-native";
+import { Link } from "expo-router";
+import { StatusBar, Text, View } from "react-native";
 
 function Profile() {
   return (
-    <View>
-      <Text>Profile</Text>
+    <View className="flex-1 items-center justify-center">
+      <Text className="text-2xl">Profile</Text>
+      <StatusBar />
+      <Link href="/">Go to Home</Link>
     </View>
   );
 }
