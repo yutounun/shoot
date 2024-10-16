@@ -6,7 +6,9 @@ function Profile() {
     <View className="flex-1 items-center justify-center">
       <Text className="text-2xl">Profile</Text>
       <StatusBar />
-      <Link href="/">Go to Home</Link>
+      <Link style={{ color: "blue" }} href="/">
+        Go to Home
+      </Link>
     </View>
   );
 }
