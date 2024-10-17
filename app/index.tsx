@@ -7,7 +7,7 @@ import { Redirect, router } from "expo-router";
 export default function App() {
   function navigateToSignIn() {
     // @ts-ignore
-    router.push("/signIn");
+    router.push("/sign-in");
   }
   return (
     <SafeAreaView className="bg-primary h-full">
