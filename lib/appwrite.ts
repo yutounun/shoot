@@ -39,14 +39,12 @@ export const createUser = async (
       password,
       username
     );
-
     if (!newAccount) {
       throw new Error();
     }
+    await signIn(email, password);
 
     const avatarUrl = avatars.getInitials(username);
-
-    await signIn(email, password);
 
     const newUser = await databases.createDocument(
       config.databaseId,
@@ -90,6 +88,31 @@ export const getCurrentUser = async () => {
     return currentUser;
   } catch (error) {
     console.log(error);
+    throw new Error(error);
+  }
+};
+
+export const getAllPosts = async () => {
+  try {
+    const posts = await databases.listDocuments(
+      config.databaseId,
+      config.videoCollectionId
+    );
+    return posts.documents;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const getLatestPosts = async () => {
+  try {
+    const posts = await databases.listDocuments(
+      config.databaseId,
+      config.videoCollectionId,
+      [Query.orderDesc("$createdAt", Query.limit(7))]
+    );
+    return posts.documents;
+  } catch (error) {
     throw new Error(error);
   }
 };
