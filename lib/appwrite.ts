@@ -79,10 +79,10 @@ export const getCurrentUser = async () => {
     const currentAccount = await account.get();
     if (!currentAccount) throw Error;
 
-    const currentUser = await databases.getDocument(
+    const currentUser = await databases.listDocuments(
       config.databaseId,
       config.userCollectionId,
-      Query.equal("accountId", currentAccount.$id)
+      [Query.equal("accountId", currentAccount.$id)]
     );
     if (!currentUser) throw Error;
     return currentUser;
@@ -123,6 +123,19 @@ export const searchPosts = async (query: string) => {
       config.databaseId,
       config.videoCollectionId,
       [Query.search("title", query)]
+    );
+    return posts.documents;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const getUserPosts = async (userId: string) => {
+  try {
+    const posts = await databases.listDocuments(
+      config.databaseId,
+      config.videoCollectionId,
+      [Query.search("creator", userId)]
     );
     return posts.documents;
   } catch (error) {
