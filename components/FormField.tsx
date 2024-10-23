@@ -8,12 +8,14 @@ const FormField = ({
   handleChangeText,
   otherStyles,
   keyboardType,
+  placeholder,
 }: {
   title: string;
   value: string;
   handleChangeText: (e: string) => void;
   otherStyles?: string;
   keyboardType?: string;
+  placeholder?: string;
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,9 +27,11 @@ const FormField = ({
         className={`border-1 border-balck-200 w-full h-16 px-4 bg-black-100 rounded-2xl focus:border-secondary justify-between flex-row items-center`}
       >
         <TextInput
-          className="text-white font-psemibold text-base flex-1"
+          className="text-white font-pregular text-base flex-1 mt-0.5"
           value={value}
           onChangeText={handleChangeText}
+          placeholder={placeholder}
+          placeholderTextColor="#cdcde0"
           secureTextEntry={!showPassword && title === "Password"}
         />
         {title === "Password" && (

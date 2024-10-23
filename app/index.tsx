@@ -2,7 +2,7 @@ import { ScrollView, SafeAreaView, Text, View, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { images } from "@/constants";
 import CustomButton from "@/components/customButton";
-import { Redirect } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { useGlobalContext } from "@/context/GlobalProvider";
 
 export default function App() {
@@ -45,6 +45,13 @@ export default function App() {
         </View>
       </ScrollView>
       <StatusBar backgroundColor="#161622" style="light" />
+
+      <CustomButton
+        title="Get Started"
+        handlePress={() => {
+          router.push("/sign-in");
+        }}
+      />
     </SafeAreaView>
   );
 }
