@@ -42,13 +42,6 @@ export default function App() {
             Where creativity meets innovation: embark on a journey of limitless
             exploration with Aora
           </Text>
-
-          <CustomButton
-            title="Continue with Email"
-            containerStyles="mt-7 w-full"
-            textStyles="text-lg"
-            handlePress={navigateToSignIn}
-          />
         </View>
       </ScrollView>
       <StatusBar backgroundColor="#161622" style="light" />

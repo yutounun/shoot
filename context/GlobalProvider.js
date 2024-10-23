@@ -16,7 +16,7 @@ export const GlobalProvider = ({ children }: any) => {
       .then((user) => {
         if (user) {
           setIsLoggedIn(true);
-          setUser(user);
+          setUser(user.documents[0]);
         } else {
           setIsLoggedIn(false);
           setUser(null);

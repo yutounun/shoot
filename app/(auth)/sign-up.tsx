@@ -7,8 +7,10 @@ import { useState } from "react";
 import CustomButton from "@/components/customButton";
 import { Link, router } from "expo-router";
 import { createUser } from "@/lib/appwrite";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const SignUp = () => {
+  const { setUser, setIsLoggedIn } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: "",
@@ -16,7 +18,7 @@ const SignUp = () => {
     password: "",
   });
 
-  function submit() {
+  async function submit() {
     setIsSubmitting(true);
     if (!form.username || !form.email || !form.password) {
       Alert.alert("Error", "Please fill in all fields");
@@ -24,7 +26,9 @@ const SignUp = () => {
 
     setIsSubmitting(true);
     try {
-      const result = createUser(form.email, form.password, form.username);
+      const result = await createUser(form.email, form.password, form.username);
+      setUser(result);
+      setIsLoggedIn(true);
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
