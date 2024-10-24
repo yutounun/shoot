@@ -1,31 +1,18 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Alert,
-} from "react-native";
+import { View, TextInput, TouchableOpacity, Image, Alert } from "react-native";
 import { icons } from "@/constants";
 import { router, usePathname } from "expo-router";
 
 const SearchInput = ({
   initialQuery,
-  title,
   value,
-  placeholder,
-  handleChangeText,
-  otherStyles,
-  keyboardType,
+  placeholder = "Search for video topic",
+  srcPage,
 }: {
   initialQuery?: string;
-  title: string;
   value: string;
   placeholder?: string;
-  handleChangeText: (e: string) => void;
-  otherStyles?: string;
-  keyboardType?: string;
+  srcPage: string;
 }) => {
   const pathname = usePathname();
   const [query, setQuery] = useState(initialQuery || "");
@@ -42,7 +29,9 @@ const SearchInput = ({
       router.setParams({ query });
     } else {
       // if you're not in serch page, go to search page with query
-      router.push(`/search/${query}`);
+      srcPage === "bookmark"
+        ? router.push(`/search/saved/${query}`)
+        : router.push(`/search/${query}`);
     }
   }
 
@@ -53,7 +42,7 @@ const SearchInput = ({
       <TextInput
         className="text-white font-pregular text-base flex-1 mt-0.5"
         value={value}
-        placeholder="Search for video topic"
+        placeholder={placeholder}
         placeholderTextColor="#cdcde0"
         onChangeText={(e) => setQuery(e)}
       />

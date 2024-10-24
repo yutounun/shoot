@@ -205,7 +205,6 @@ export const uploadFile = async (file: any, type: "image" | "video") => {
 };
 
 export const createVideo = async (form: any) => {
-  // console.log("🚀 ~ createVideo ~ form:", form);
   try {
     const [thumbnail, video] = await Promise.all([
       uploadFile(form.thumbnail, "image"),
@@ -228,6 +227,36 @@ export const createVideo = async (form: any) => {
     return newPost;
   } catch (error) {
     console.log(error);
+    throw new Error(error);
+  }
+};
+
+export const bookmarkedPosts = async (userId: string) => {
+  try {
+    console.log("🚀 ~ bookmarkedPosts ~ userId:", userId);
+    const posts = await databases.listDocuments(
+      config.databaseId,
+      config.videoCollectionId,
+      [Query.equal("bookmarkUsers", userId)]
+    );
+    return posts.documents;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const searchBookmarkedPosts = async (
+  userId: string,
+  keyword: string
+) => {
+  try {
+    const posts = await databases.listDocuments(
+      config.databaseId,
+      config.videoCollectionId,
+      [Query.equal("bookmarkUsers", userId), Query.search("title", keyword)]
+    );
+    return posts.documents;
+  } catch (error) {
     throw new Error(error);
   }
 };
