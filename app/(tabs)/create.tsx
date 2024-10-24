@@ -16,6 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import { createVideo } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import Loading from "@/components/Loading";
 
 const create = () => {
   const [uploading, setUploading] = useState(false);
@@ -85,6 +86,10 @@ const create = () => {
       setUploading(false);
     }
   };
+
+  if (uploading) {
+    return <Loading />;
+  }
 
   return (
     <SafeAreaView className="bg-primary h-full">

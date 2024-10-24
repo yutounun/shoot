@@ -44,7 +44,6 @@ const SignIn = () => {
     } finally {
       setIsSubmitting(false);
     }
-    console.log("🚀 ~ submit ~ result.documents[0]:", result.documents[0]);
   }
 
   return (

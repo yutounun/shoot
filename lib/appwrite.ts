@@ -125,7 +125,7 @@ export const searchPosts = async (query: string) => {
     const posts = await databases.listDocuments(
       config.databaseId,
       config.videoCollectionId,
-      [Query.search("title", query)]
+      [Query.search("title", query), Query.orderDesc("$createdAt")]
     );
     return posts.documents;
   } catch (error) {
@@ -253,7 +253,11 @@ export const searchBookmarkedPosts = async (
     const posts = await databases.listDocuments(
       config.databaseId,
       config.videoCollectionId,
-      [Query.equal("bookmarkUsers", userId), Query.search("title", keyword)]
+      [
+        Query.equal("bookmarkUsers", userId),
+        Query.search("title", keyword),
+        Query.orderDesc("$createdAt"),
+      ]
     );
     return posts.documents;
   } catch (error) {
