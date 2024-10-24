@@ -1,4 +1,11 @@
-import { Text, FlatList, View, Image, RefreshControl } from "react-native";
+import {
+  Text,
+  FlatList,
+  View,
+  Image,
+  RefreshControl,
+  TouchableOpacity,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "@/constants";
 import SearchInput from "@/components/SearchInput";
@@ -10,6 +17,8 @@ import useAppwrite from "@/lib/useAppwrite";
 import VideoCard from "@/components/VideoCard";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import Loading from "@/components/Loading";
+import { router } from "expo-router";
+import HomeImage from "@/components/HomeImage";
 
 const home = () => {
   const { user } = useGlobalContext();
@@ -46,13 +55,7 @@ const home = () => {
                 </Text>
               </View>
 
-              <View className="mt-1.5">
-                <Image
-                  source={images.logoSmall}
-                  className="w-9 h-10"
-                  resizeMode="contain"
-                />
-              </View>
+              <HomeImage />
             </View>
 
             <SearchInput srcPage="home" />

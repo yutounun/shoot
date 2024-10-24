@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, Image, Alert } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 
 import { images } from "@/constants";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -44,11 +51,13 @@ const SignIn = () => {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full min-h-[85vh] justify-center px-4">
-          <Image
-            source={images.logo}
-            resizeMode="contain"
-            className="w-[115px] h-35px"
-          />
+          <TouchableOpacity onPress={() => router.push("/")} className="mt-1.5">
+            <Image
+              source={images.logo}
+              resizeMode="contain"
+              className="w-[115px] h-35px"
+            />
+          </TouchableOpacity>
 
           <Text className="text-2xl text-white text-semibold mt-3 font-psemibold">
             Log in to Aora

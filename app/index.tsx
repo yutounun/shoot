@@ -8,7 +8,9 @@ import { useGlobalContext } from "@/context/GlobalProvider";
 export default function App() {
   const { isLoading, isLoggedIn } = useGlobalContext();
 
-  if (!isLoading && !isLoggedIn) return <Redirect href="/home" />;
+  if (!isLoading && isLoggedIn) {
+    return <Redirect href="/home" />;
+  }
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -42,16 +44,16 @@ export default function App() {
             Where creativity meets innovation: embark on a journey of limitless
             exploration with Aora
           </Text>
+          <CustomButton
+            title="Get Started"
+            containerStyles="mt-10 w-full"
+            handlePress={() => {
+              router.push("/sign-in");
+            }}
+          />
         </View>
       </ScrollView>
       <StatusBar backgroundColor="#161622" style="light" />
-
-      <CustomButton
-        title="Get Started"
-        handlePress={() => {
-          router.push("/sign-in");
-        }}
-      />
     </SafeAreaView>
   );
 }
